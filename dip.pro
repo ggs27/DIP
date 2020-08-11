@@ -5,7 +5,9 @@ QMAKE_CXXFLAGS+= -openmp
 
 HEADERS       = mainwindow.h \
                 acedialog.h \
+                blurdialog.h \
                 closedialog.h \
+                cooldialog.h \
                 dilationdialog.h \
                 embossfilterdialog.h \
                 erosiondialog.h \
@@ -16,11 +18,16 @@ HEADERS       = mainwindow.h \
                 mdichild.h \
                 opendialog.h \
                 padding.h \
+                saturationdialog.h \
                 sdfilterdialog.h \
-                transform.h
+                sharpendialog.h \
+                transform.h \
+                warmdialog.h
 SOURCES       = main.cpp \
                 acedialog.cpp \
+                blurdialog.cpp \
                 closedialog.cpp \
+                cooldialog.cpp \
                 dilationdialog.cpp \
                 embossfilterdialog.cpp \
                 erosiondialog.cpp \
@@ -30,8 +37,11 @@ SOURCES       = main.cpp \
                 mdichild.cpp \
                 opendialog.cpp \
                 padding.cpp \
+                saturationdialog.cpp \
                 sdfilterdialog.cpp \
-                transform.cpp
+                sharpendialog.cpp \
+                transform.cpp \
+                warmdialog.cpp
 RESOURCES     = \
     dip.qrc
 

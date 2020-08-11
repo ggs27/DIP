@@ -34,8 +34,15 @@ void CloseDialog::iniUI()
     layout1->addWidget(srcImageLabel);
     layout1->addWidget(dstImageLabel);
 
-//    srcLabel = new QLabel(tr("Original"));
-//    srcLabel->setAlignment(Qt::AlignCenter);
+    srcLabel = new QLabel(tr("Original"));
+    srcLabel->setAlignment(Qt::AlignCenter);
+
+    dstLabel = new QLabel(tr("Close"));
+    dstLabel->setAlignment(Qt::AlignCenter);
+
+    QHBoxLayout *layout2 = new QHBoxLayout;
+    layout2->addWidget(srcLabel);
+    layout2->addWidget(dstLabel);
 
     QHBoxLayout *layout3=new QHBoxLayout;
     layout3->addStretch();
@@ -48,6 +55,7 @@ void CloseDialog::iniUI()
     // main layout
     QVBoxLayout *mainlayout = new QVBoxLayout;
     mainlayout->addLayout(layout1);
+    mainlayout->addLayout(layout2);
     mainlayout->addLayout(layout3);
     setLayout(mainlayout);
 }

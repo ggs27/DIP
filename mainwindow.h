@@ -61,11 +61,17 @@
 #include "sdfilterdialog.h"
 #include "embossfilterdialog.h"
 #include "transform.h"
+//Morphological processing
 #include "erosiondialog.h"
-#include "dilationdialog.h"
 #include "dilationdialog.h"
 #include "closedialog.h"
 #include "opendialog.h"
+//Image style processing
+#include "blurdialog.h"
+#include "cooldialog.h"
+#include "warmdialog.h"
+#include "saturationdialog.h"
+#include "sharpendialog.h"
 
 //class MdiChild;
 //class MdiViewChild;
@@ -127,6 +133,11 @@ private slots:
     void OpenOperation();
     void CloseOperation();
 
+    void blurOperation();
+    void coolOperation();
+    void warmOperation();
+    void saturationOperation();
+    void sharpenOperation();
 
 private:
     enum { MaxRecentFiles = 5 };
@@ -221,6 +232,13 @@ private:
     QAction *dilateAct;
     QAction *openningAct;
     QAction *closingAct;
+
+    QMenu *imageStyleMenu;
+    QAction *blurAct;
+    QAction *coolAct;
+    QAction *warmAct;
+    QAction *saturationAct;
+    QAction *sharpenAct;
 };
 
 #endif

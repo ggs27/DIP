@@ -577,13 +577,19 @@ void MainWindow::createActions()
     embossFilterAct = filterMenu->addAction(tr("Emboss Filter"), this, &MainWindow::embossFiltering);
 
     menuBar()->addSeparator();
-    morphologyMenu = menuBar()->addMenu(tr("形态学处理"));
-    erodeAct = morphologyMenu->addAction(tr("腐蚀"), this, &MainWindow::erosionOperation);
-    dilateAct = morphologyMenu->addAction(tr("膨胀"), this, &MainWindow::dilationOperation);
-    openningAct = morphologyMenu->addAction(tr("开操作"), this, &MainWindow::OpenOperation);
-    closingAct = morphologyMenu->addAction(tr("闭操作 "), this, &MainWindow::CloseOperation);
+    morphologyMenu = menuBar()->addMenu(tr("&Morphology"));
+    erodeAct = morphologyMenu->addAction(tr("Erode"), this, &MainWindow::erosionOperation);
+    dilateAct = morphologyMenu->addAction(tr("Dilate"), this, &MainWindow::dilationOperation);
+    openningAct = morphologyMenu->addAction(tr("open"), this, &MainWindow::OpenOperation);
+    closingAct = morphologyMenu->addAction(tr("close "), this, &MainWindow::CloseOperation);
 
     menuBar()->addSeparator();
+    imageStyleMenu = menuBar()->addMenu(tr("&ImageStyle"));
+    blurAct = imageStyleMenu->addAction(tr("Blur"), this, &MainWindow::blurOperation);
+    coolAct = imageStyleMenu->addAction(tr("Cool"), this, &MainWindow::coolOperation);
+    warmAct = imageStyleMenu->addAction(tr("Warm"), this, &MainWindow::warmOperation);
+    saturationAct = imageStyleMenu->addAction(tr("Saturation"), this, &MainWindow::saturationOperation);
+    sharpenAct = imageStyleMenu->addAction(tr("Sharpen"), this, &MainWindow::sharpenOperation);
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
 
@@ -1094,6 +1100,100 @@ void MainWindow::CloseOperation()
     }
 }
 
+void MainWindow::blurOperation()
+{
+    MdiChild * owner = activeMdiChild();
+    if (owner) {
+        QImage image = owner->image;
+
+        BlurDialog *c = new BlurDialog(image);
+        c->setWindowTitle(tr("Blur Operation"));
+        int ret = c->exec () ; // modal dialog
+        if (ret == QDialog::Accepted)
+        {
+            QImage newImage = c->getImage();
+            owner->setImage(newImage);
+        }
+
+        delete c;
+    }
+}
+
+void MainWindow::coolOperation()
+{
+    MdiChild * owner = activeMdiChild();
+    if (owner) {
+        QImage image = owner->image;
+
+        CoolDialog *c = new CoolDialog(image);
+        c->setWindowTitle(tr("Cool Operation"));
+        int ret = c->exec () ; // modal dialog
+        if (ret == QDialog::Accepted)
+        {
+            QImage newImage = c->getImage();
+            owner->setImage(newImage);
+        }
+
+        delete c;
+    }
+}
+
+void MainWindow::warmOperation()
+{
+    MdiChild * owner = activeMdiChild();
+    if (owner) {
+        QImage image = owner->image;
+
+        WarmDialog *c = new WarmDialog(image);
+        c->setWindowTitle(tr("Warm Operation"));
+        int ret = c->exec () ; // modal dialog
+        if (ret == QDialog::Accepted)
+        {
+            QImage newImage = c->getImage();
+            owner->setImage(newImage);
+        }
+
+        delete c;
+    }
+}
+
+
+void MainWindow::saturationOperation()
+{
+    MdiChild * owner = activeMdiChild();
+    if (owner) {
+        QImage image = owner->image;
+
+        SaturationDialog *c = new SaturationDialog(image);
+        c->setWindowTitle(tr("Warm Operation"));
+        int ret = c->exec () ; // modal dialog
+        if (ret == QDialog::Accepted)
+        {
+            QImage newImage = c->getImage();
+            owner->setImage(newImage);
+        }
+
+        delete c;
+    }
+}
+void MainWindow::sharpenOperation()
+{
+    MdiChild * owner = activeMdiChild();
+    if (owner) {
+        QImage image = owner->image;
+
+        SharpenDialog *c = new SharpenDialog(image);
+        c->setWindowTitle(tr("Warm Operation"));
+        int ret = c->exec () ; // modal dialog
+        if (ret == QDialog::Accepted)
+        {
+            QImage newImage = c->getImage();
+            owner->setImage(newImage);
+        }
+
+        delete c;
+    }
+}
 
 void MainWindow::switchLanguage()
 {
@@ -1215,5 +1315,14 @@ void MainWindow::retranslate()
 
     morphologyMenu->setTitle(tr("&Morphology"));
     erodeAct->setText(tr("Erode"));
+    dilateAct->setText(tr("Dilate"));
+    openningAct->setText(tr("open"));
+    closingAct->setText(tr("close"));
 
+    imageStyleMenu->setTitle(tr("&ImageStyle"));
+    blurAct->setText(tr("Blur"));
+    coolAct->setText(tr("Cool"));
+    warmAct->setText(tr("Warm"));
+    saturationAct->setText(tr("Saturation"));
+    sharpenAct->setText(tr("Sharpen"));
 }
