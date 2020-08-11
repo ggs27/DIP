@@ -12,8 +12,13 @@ windows 10 + Qt 5.14.2 + MSVC 2017 + fftw 64bit
 ### 5) Multiple language dynamic switching
 ## 3. Add Function Lists
 
-### 1) Erosion Operating
-### 2) Dialtion Operating
-### 3) Open Operating
-### 4) Close Operating
-### 5) Change background color 
+### 1) Erosion Operation
+### 2) Dialtion Operation
+### 3) Open Operation
+### 4) Close Operation
+### 5) Cool Operation
+### 6) Warm Operation
+### 7) Sharpen Operation
+### 8) Blur Operation
+### 9) Saturation Operation
+### 10) Change background color 
