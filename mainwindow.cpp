@@ -71,7 +71,17 @@ MainWindow::MainWindow()
     setWindowTitle(tr("DIP"));
     setUnifiedTitleAndToolBarOnMac(true);
 
+    // install event filter
     this->installEventFilter(this);
+
+
+    /****************************************************************/
+    //set icon
+    setWindowIcon(QIcon(":/images/main.ico"));
+    // set background color
+    this->setStyleSheet("background-color:gray;");
+    /*****************************************************************/
+
 
     translator.load(":/languages/zh_CN.qm");
     qApp->installTranslator( &translator );
@@ -567,6 +577,13 @@ void MainWindow::createActions()
     embossFilterAct = filterMenu->addAction(tr("Emboss Filter"), this, &MainWindow::embossFiltering);
 
     menuBar()->addSeparator();
+    morphologyMenu = menuBar()->addMenu(tr("形态学处理"));
+    erodeAct = morphologyMenu->addAction(tr("腐蚀"), this, &MainWindow::erosionOperation);
+    dilateAct = morphologyMenu->addAction(tr("膨胀"), this, &MainWindow::dilationOperation);
+    openningAct = morphologyMenu->addAction(tr("开操作"), this, &MainWindow::OpenOperation);
+    closingAct = morphologyMenu->addAction(tr("闭操作 "), this, &MainWindow::CloseOperation);
+
+    menuBar()->addSeparator();
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
 
@@ -586,6 +603,8 @@ void MainWindow::createActions()
 
     aboutQtAct = helpMenu->addAction(tr("About &Qt"), qApp, &QApplication::aboutQt);
     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
+
+
 }
 
 void MainWindow::createStatusBar()
@@ -996,6 +1015,86 @@ void MainWindow::embossFiltering()
     }
 }
 
+void MainWindow::erosionOperation()
+{
+    MdiChild * owner = activeMdiChild();
+    if (owner) {
+        QImage image = owner->image;
+
+        ErosionDialog *e = new ErosionDialog(image);
+        e->setWindowTitle(tr("Erode Operation"));
+        int ret = e->exec () ; // modal dialog
+        if (ret == QDialog::Accepted)
+        {
+            QImage newImage = e->getImage();
+            owner->setImage(newImage);
+        }
+
+        delete e;
+    }
+}
+
+
+void MainWindow::dilationOperation()
+{
+    MdiChild * owner = activeMdiChild();
+    if (owner) {
+        QImage image = owner->image;
+
+        DilationDialog *d = new DilationDialog(image);
+        d->setWindowTitle(tr("Dilate Operation"));
+        int ret = d->exec () ; // modal dialog
+        if (ret == QDialog::Accepted)
+        {
+            QImage newImage = d->getImage();
+            owner->setImage(newImage);
+        }
+
+        delete d;
+    }
+}
+
+
+void MainWindow::OpenOperation()
+{
+    MdiChild * owner = activeMdiChild();
+    if (owner) {
+        QImage image = owner->image;
+
+        OpenDialog *o = new OpenDialog(image);
+        o->setWindowTitle(tr("Open Operation"));
+        int ret = o->exec () ; // modal dialog
+        if (ret == QDialog::Accepted)
+        {
+            QImage newImage = o->getImage();
+            owner->setImage(newImage);
+        }
+
+        delete o;
+    }
+}
+
+
+void MainWindow::CloseOperation()
+{
+    MdiChild * owner = activeMdiChild();
+    if (owner) {
+        QImage image = owner->image;
+
+        CloseDialog *c = new CloseDialog(image);
+        c->setWindowTitle(tr("Close Operation"));
+        int ret = c->exec () ; // modal dialog
+        if (ret == QDialog::Accepted)
+        {
+            QImage newImage = c->getImage();
+            owner->setImage(newImage);
+        }
+
+        delete c;
+    }
+}
+
+
 void MainWindow::switchLanguage()
 {
     QString languageFile;
@@ -1113,4 +1212,8 @@ void MainWindow::retranslate()
 
     aboutQtAct->setText(tr("About &Qt"));
     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
+
+    morphologyMenu->setTitle(tr("&Morphology"));
+    erodeAct->setText(tr("Erode"));
+
 }

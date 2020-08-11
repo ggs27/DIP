@@ -61,6 +61,11 @@
 #include "sdfilterdialog.h"
 #include "embossfilterdialog.h"
 #include "transform.h"
+#include "erosiondialog.h"
+#include "dilationdialog.h"
+#include "dilationdialog.h"
+#include "closedialog.h"
+#include "opendialog.h"
 
 //class MdiChild;
 //class MdiViewChild;
@@ -117,6 +122,11 @@ private slots:
     void frequencyDomainFiltering();// frequency Domain Filtering
     void embossFiltering();// emboss Filtering
     void switchLanguage();// switch Language：cn/en
+    void erosionOperation();
+    void dilationOperation();
+    void OpenOperation();
+    void CloseOperation();
+
 
 private:
     enum { MaxRecentFiles = 5 };
@@ -205,6 +215,12 @@ private:
     QAction *timeDomainAct;
     QAction *frequencyDomainAct;
     QAction *embossFilterAct;
+
+    QMenu *morphologyMenu;
+    QAction *erodeAct;
+    QAction *dilateAct;
+    QAction *openningAct;
+    QAction *closingAct;
 };
 
 #endif
